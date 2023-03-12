@@ -32,8 +32,16 @@ export default function ScoreboardInput() {
 
   return (
     <SBoard>
-      <Numbers fs={value === "Infinity" || value.length > 10 ? "19px" : "36px"}>
-        {value === "Infinity" ? "Не определено" : value}
+      <Numbers
+        fs={
+          value === "Infinity" || value === "-Infinity" || value.length > 10
+            ? "19px"
+            : "36px"
+        }
+      >
+        {value === "Infinity" || value === "-Infinity"
+          ? "Не определено"
+          : value}
       </Numbers>
     </SBoard>
   );
