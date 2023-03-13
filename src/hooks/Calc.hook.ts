@@ -18,9 +18,10 @@ export const useCalc = () => {
     let chars = expression[index] ? expression[index]!.split("") : "0";
 
     if (chars.includes(",") && btn === ",") return;
+
     let condition = chars === "0" || lastIsEqually;
     if (condition && btn === ",") btn = "0" + btn;
-    if (condition && btn === "0") btn = "0,0";
+    if (condition && btn === "0" && lastIsEqually) btn = "0,0";
     let copyExpression = [...expression];
     copyExpression[index] = condition ? btn : expression[index] + btn;
 

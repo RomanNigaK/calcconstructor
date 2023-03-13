@@ -21,7 +21,13 @@ const Button = styled.div.attrs<{ type?: string }>((props) => ({
   bg: props.type === "big" ? "#5D5FEF" : "inherit",
   color: props.type === "big" ? "#FFFFFF" : "inherit",
   h: props.type === "big" ? "64px" : "46px",
-}))<{ type?: string; bg?: string; color?: string; h?: string }>`
+}))<{
+  type?: string;
+  bg?: string;
+  color?: string;
+  h?: string;
+  runtime?: boolean;
+}>`
   margin: 4px;
   display: flex;
   justify-content: center;
@@ -32,6 +38,22 @@ const Button = styled.div.attrs<{ type?: string }>((props) => ({
   border-radius: 6px;
   color: ${({ color }) => color};
   background-color: ${({ bg }) => bg};
+
+  &:hover {
+    cursor: ${({ runtime }) => (runtime ? "pointer" : "default")};
+    border: ${({ runtime }) =>
+      runtime ? "2px solid #5d5fef" : "1px solid #e2e3e5"};
+    height: calc(
+      ${({ h }) => h} - ${({ runtime }) => (runtime ? "2px" : "0px")}
+    );
+    width: calc(
+      ${({ type }) => type} - ${({ runtime }) => (runtime ? "2px" : "0px")}
+    );
+  }
+  &:active {
+    background: ${({ runtime }) => (runtime ? "#5d5fef;" : "inherit")};
+    color: ${({ runtime }) => (runtime ? "#fff;" : "inherit")};
+  }
 `;
 
 const Text = styled.div`
@@ -65,7 +87,7 @@ export default function Btn({ type, text }: IPropsBtn) {
   };
   return (
     <>
-      <Button type={type} onClick={() => submit(text)}>
+      <Button type={type} onClick={() => submit(text)} runtime={runtime}>
         <Text>{text}</Text>
       </Button>
     </>

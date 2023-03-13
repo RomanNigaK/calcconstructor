@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
+import { useToggle } from "../../hooks/Toggle.hook";
+
 import { CalcCtx } from "../context/CalcContext";
 
-const SBoard = styled.div`
+const SBoard = styled.div.attrs(() => ({}))<{ cheked?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -15,6 +17,7 @@ const SBoard = styled.div`
   border-radius: 6px;
   padding-left: 5px;
   padding-right: 5px;
+  cursor: ${({ cheked }) => (cheked ? "no-drop" : "default")};
 `;
 const Numbers = styled.div.attrs((props) => ({}))<{ fs?: string }>`
   height: 44px;
@@ -27,11 +30,16 @@ const Numbers = styled.div.attrs((props) => ({}))<{ fs?: string }>`
   overflow: hidden;
 `;
 
-export default function ScoreboardInput() {
+interface IScoreboardInputProps {
+  cheked?: boolean;
+}
+
+export default function ScoreboardInput({ cheked }: IScoreboardInputProps) {
   const { scoreboardInput, isError } = useContext(CalcCtx);
+  const { runtime } = useToggle();
 
   return (
-    <SBoard>
+    <SBoard cheked={cheked && !runtime}>
       <Numbers fs={isError || scoreboardInput.length > 10 ? "19px" : "36px"}>
         {isError ? "Не определено" : scoreboardInput}
       </Numbers>

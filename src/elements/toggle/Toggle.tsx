@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 
 import styled, { css } from "styled-components";
-import { useCalc } from "../../hooks/Calc.hook";
 
 import { useToggle } from "../../hooks/Toggle.hook";
 

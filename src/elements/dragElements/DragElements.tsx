@@ -1,7 +1,7 @@
-import React, { LegacyRef, useContext } from "react";
+import React, { LegacyRef } from "react";
 
 import Btn from "../btn/Btn";
-import { CalcCtx } from "../context/CalcContext";
+
 import Group from "../group/Group";
 import ScoreboardInput from "../scoreboard/Scoreboard";
 
@@ -32,7 +32,7 @@ export const Numbers = ({ cheked, index = null, refI }: IPropsEl) => {
 export const Scoreboard = ({ cheked, index = null, refI }: IPropsEl) => {
   return (
     <Group name="Scoreboard" cheked={cheked} index={index} refI={refI}>
-      <ScoreboardInput />
+      <ScoreboardInput cheked={cheked} />
     </Group>
   );
 };
