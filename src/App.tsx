@@ -48,7 +48,14 @@ function App() {
   const { runtime } = useToggle();
 
   const refI = useRef<HTMLDivElement>(null);
-  const { buttonNumber, action, value, clear, equally } = useCalc();
+  const {
+    clickBtnNumber,
+    clickEqually,
+    action,
+    scoreboardInput,
+    isError,
+    clear,
+  } = useCalc();
 
   return (
     <Body>
@@ -62,18 +69,17 @@ function App() {
         </Elements>
 
         <div style={{ marginLeft: " 26px" }}>
-          <Toggle />
           <CalcCtx.Provider
             value={{
-              operandOne: null,
-              operandTwo: null,
-              buttonNumber: buttonNumber,
-              action: action,
-              clear: clear,
-              equally: equally,
-              value: value,
+              clickBtnNumber,
+              action,
+              clickEqually,
+              scoreboardInput,
+              isError,
+              clear,
             }}
           >
+            <Toggle />
             <Result refI={refI}>
               {collection.length === 0 ? (
                 <ClearResult>

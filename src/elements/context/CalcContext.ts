@@ -1,11 +1,10 @@
 import { createContext } from "react";
 
 export const CalcCtx = createContext({
-  operandOne: null,
-  operandTwo: null,
-  buttonNumber: (val: string) => {},
+  clickBtnNumber: (val: string) => {},
   action: (val: string) => {},
+  clickEqually: () => {},
+  scoreboardInput: "0",
+  isError: false,
   clear: () => {},
-  equally: () => {},
-  value: "0",
 });

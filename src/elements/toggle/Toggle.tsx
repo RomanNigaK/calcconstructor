@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
 import styled, { css } from "styled-components";
+import { useCalc } from "../../hooks/Calc.hook";
 
 import { useToggle } from "../../hooks/Toggle.hook";
 
@@ -52,7 +53,6 @@ const Constructor = styled.div.attrs<{ isActive: boolean }>((props) => ({
 export default function Toggle() {
   const { runtime, trueRintime, falseRintime } = useToggle();
   const { clear } = useContext(CalcCtx);
-
   const setModeConstructor = () => {
     falseRintime();
     clear();

@@ -28,20 +28,12 @@ const Numbers = styled.div.attrs((props) => ({}))<{ fs?: string }>`
 `;
 
 export default function ScoreboardInput() {
-  const { value } = useContext(CalcCtx);
+  const { scoreboardInput, isError } = useContext(CalcCtx);
 
   return (
     <SBoard>
-      <Numbers
-        fs={
-          value === "Infinity" || value === "-Infinity" || value.length > 10
-            ? "19px"
-            : "36px"
-        }
-      >
-        {value === "Infinity" || value === "-Infinity"
-          ? "Не определено"
-          : value}
+      <Numbers fs={isError || scoreboardInput.length > 10 ? "19px" : "36px"}>
+        {isError ? "Не определено" : scoreboardInput}
       </Numbers>
     </SBoard>
   );

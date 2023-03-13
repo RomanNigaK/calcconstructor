@@ -44,7 +44,7 @@ interface IPropsBtn {
 }
 
 export default function Btn({ type, text }: IPropsBtn) {
-  const { buttonNumber, action, equally } = useContext(CalcCtx);
+  const { clickBtnNumber, action, clickEqually } = useContext(CalcCtx);
   const { runtime } = useToggle();
 
   const submit = (btn: string) => {
@@ -52,14 +52,14 @@ export default function Btn({ type, text }: IPropsBtn) {
       if (
         ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ","].includes(btn)
       ) {
-        buttonNumber(text);
+        clickBtnNumber(text);
       }
       if (["+", "-", "*", "/"].includes(btn)) {
         action(text);
       }
 
       if (btn === "=") {
-        equally();
+        clickEqually();
       }
     }
   };
