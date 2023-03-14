@@ -96,9 +96,9 @@ function App() {
               ) : (
                 collection.map((i: any, index: number) => {
                   return (
-                    <>
+                    <div key={index}>
                       <DragElements name={i} index={index} refI={refI} />
-                    </>
+                    </div>
                   );
                 })
               )}

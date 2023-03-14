@@ -1,8 +1,8 @@
-import React, { PropsWithChildren, useCallback, useRef, useState } from "react";
-import { useDrag, useDrop } from "react-dnd";
+import React, { PropsWithChildren, useRef } from "react";
+import { useDrop } from "react-dnd";
 import styled from "styled-components";
 import { addResultCollection } from "../../redux/appSlice";
-import { RootState, AppDispatch } from "../../store/store";
+import { AppDispatch } from "../../store/store";
 import { useDispatch } from "react-redux";
 import { useResultDropElement } from "../../hooks/Elements.hook";
 
@@ -26,7 +26,7 @@ export default function Result({ children, refI }: IResultProps) {
   const dispatch = useDispatch<AppDispatch>();
   const ref = useRef<HTMLDivElement>(null);
 
-  const [{ canDrop, isOver }, dropRef] = useDrop({
+  const [{ isOver }, dropRef] = useDrop({
     accept: ["Scoreboard", "Numbers", "Option", "Equally", "GroupBtn"],
     drop: (item) => {
       dispatch(addResultCollection(item));
@@ -34,9 +34,7 @@ export default function Result({ children, refI }: IResultProps) {
 
     collect: (monitor) => ({
       isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
     }),
-    hover: (item, monitor) => {},
   });
 
   dropRef(ref);

@@ -44,15 +44,17 @@ export default function Group({
     }),
   }));
 
-  const [, dropRef] = useDrop({
+  const [{ isOver }, dropRef] = useDrop({
     accept: ["GroupBtn"],
     drop: (item: any) => {
-      console.log(item);
       if (refI) refI.current.style.display = "none";
       if (item.name !== "Scoreboard" && item.index !== null) {
         dispatch(sortArray({ drag: item.index, newPosition }));
       }
     },
+    collect: (monitor) => ({
+      isOver: !!monitor.isOver(),
+    }),
 
     hover: (item, monitor) => {
       let itemDrag = item as IItem;
@@ -89,7 +91,7 @@ export default function Group({
             refI.current.style.left = hoverBoundingRect!.left.toFixed() + "px";
             refI.current.style.display = "block";
           }
-          console.log("ниже середины элемента", indexHover);
+
           setnewPosition(indexHover === 0 ? indexHover + 1 : indexHover);
         }
         if (full < halffull) {
@@ -98,7 +100,7 @@ export default function Group({
             refI.current.style.top = hoverBoundingRect!.top - 7 + "px";
             refI.current.style.left = hoverBoundingRect!.left.toFixed() + "px";
             refI.current.style.display = "block";
-            console.log("выше середины элемента", indexHover);
+
             setnewPosition(
               indexHover === (0 || 1) ? indexHover : indexHover - 1
             );

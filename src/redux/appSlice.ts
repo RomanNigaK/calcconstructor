@@ -34,16 +34,14 @@ export const appSlice = createSlice({
       state.resultCollection = arr;
     },
     sortArray: (state, action) => {
-      console.log(action.payload);
       let dragIndex = action.payload.drag;
       let newPosition = action.payload.newPosition;
       if (newPosition === 0) return;
       let arr = [...state.resultCollection];
       var removed = arr.splice(dragIndex, 1)[0];
-      console.log("arr", arr.length);
+
       let newArr: string[] = [];
       arr.forEach((element, index) => {
-        console.log(index);
         if (index === newPosition) {
           newArr.push(removed);
         }

@@ -68,7 +68,6 @@ export const useCalc = () => {
 
     if (exp!) {
       let result = eval(exp);
-      console.log(result);
 
       if (!isFinite(result)) {
         setIsError(true);
